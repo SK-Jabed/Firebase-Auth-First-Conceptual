@@ -1,7 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
-    return (
+    const links = (
       <>
         <li>
           <NavLink to={"/"}>Home</NavLink>
@@ -12,7 +13,7 @@ const Navbar = () => {
         <li>
           <NavLink to={"/signup"}>Sign Up</NavLink>
         </li>
-        {user && (
+        {/* {user && (
           <>
             <li>
               <NavLink to={"/orders"}>Orders</NavLink>
@@ -21,7 +22,7 @@ const Navbar = () => {
               <NavLink to={"/profile"}>Profile</NavLink>
             </li>
           </>
-        )}
+        )} */}
       </>
     );
 
@@ -58,11 +59,11 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          {user ? (
+          {/* {user ? (
             <>
               <span>{user?.email}</span>
               <a
-                onClick={handleSignOut}
+                // onClick={handleSignOut}
                 className="btn btn-info ml-2 text-base font-bold"
               >
                 Sign Out
@@ -70,7 +71,10 @@ const Navbar = () => {
             </>
           ) : (
             <Link to={"/login"}>Login</Link>
-          )}
+          )} */}
+          <button className="btn btn-info ml-2 text-base font-bold">
+            Sign Out
+          </button>
         </div>
       </div>
     );
