@@ -1,13 +1,8 @@
 import React, { useContext } from 'react';
 import { authContext } from '../Layout/MainLayout';
 
-
-const Home = () => {
-    const contextValue = useContext(authContext);
-
-    const { handleGoogleLogin, handleGithubLogin, handleTwitterLogin } = contextValue;
-
-    
+const About = () => {
+    const { handleGoogleLogin, handleTwitterLogin } = useContext(authContext);
 
     return (
       <div className="flex justify-center items-center gap-4 mt-6">
@@ -16,9 +11,6 @@ const Home = () => {
           className="btn btn-outline btn-accent"
         >
           Login with Google
-        </button>
-        <button onClick={handleGithubLogin} className="btn btn-warning">
-          Login with GitHub
         </button>
         <button
           onClick={handleTwitterLogin}
@@ -30,4 +22,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default About;
