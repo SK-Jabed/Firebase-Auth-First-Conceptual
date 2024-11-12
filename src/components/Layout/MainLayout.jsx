@@ -56,6 +56,8 @@ const MainLayout = () => {
       handleGoogleLogin,
       handleGithubLogin,
       handleTwitterLogin,
+      user, 
+      setUser
     };
 
     return (
