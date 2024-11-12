@@ -7,8 +7,6 @@ const Home = () => {
 
     const { handleGoogleLogin, handleGithubLogin, handleTwitterLogin } = contextValue;
 
-    
-
     return (
       <div className="flex justify-center items-center gap-4 mt-6">
         <button
