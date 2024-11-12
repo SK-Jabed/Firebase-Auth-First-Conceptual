@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import {
@@ -12,14 +12,16 @@ import auth from "../../firebase.config";
 export const authContext = createContext();
 
 const MainLayout = () => {
-const googleProvider = new GoogleAuthProvider();
+    const [user, setUser] = useState(null);
+
+    const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
     const twitterProvider = new TwitterAuthProvider();
 
     const handleGoogleLogin = () => {
         signInWithPopup(auth, googleProvider)
         .then(result => {
-            console.log(result.user);
+            setUser(result.user);
         })
         .catch(error => {
             console.log("ERROR:", error);
@@ -29,7 +31,7 @@ const googleProvider = new GoogleAuthProvider();
     const handleGithubLogin = () => {
         signInWithPopup(auth, githubProvider)
         .then(result => {
-            console.log(result.user);
+            setUser(result.user);
         })
         .catch(error => {
             console.log("ERROR:", error);
@@ -39,12 +41,16 @@ const googleProvider = new GoogleAuthProvider();
     const handleTwitterLogin = () => {
         signInWithPopup(auth, twitterProvider)
         .then(result => {
-            console.log(result.user);
+            setUser(result.user);
         })
         .catch(error => {
             console.log("ERROR:", error);
         })
     }
+
+    useEffect(() => {
+        console.log("User state:", user);
+    }, [user])
 
     const authData = {
       handleGoogleLogin,
