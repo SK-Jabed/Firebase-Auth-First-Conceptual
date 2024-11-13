@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import {
+    createUserWithEmailAndPassword,
   GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -51,6 +52,16 @@ const MainLayout = () => {
         })
     }
 
+    const handleSignUp = (email, password) => {
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(result => {
+            console.log(result.user);
+        })
+        .catch(error => {
+            console.log("ERROR:", error);
+        })  
+    }
+
     const handleLogOut = () => {
         signOut(auth)
         .then(result => {
@@ -81,6 +92,7 @@ const MainLayout = () => {
       user,
       setUser,
       handleLogOut,
+      handleSignUp,
     };
 
     return (

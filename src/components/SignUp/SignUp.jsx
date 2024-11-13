@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { authContext } from '../Layout/MainLayout';
 
 const SignUp = () => {
-    const handleSignUp = (e) => {
+    const { handleSignUp } = useContext(authContext);
+
+    const handleSubmit = (e) => {
       e.preventDefault();
 
       const fullName = e.target.name.value;
@@ -11,18 +14,27 @@ const SignUp = () => {
       const password = e.target.password.value;
       const confirmedPassword = e.target.confirmPassword.value;
 
-      console.log(fullName, userName, email, password, confirmedPassword);
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters");
+        return;
+      }
+      if (password !== confirmedPassword) {
+        alert("Password didn't matched");
+        return;
+      }
+
+      handleSignUp(email, password);
 
       // Create user
-    //   createUser(email, password)
-    //     .then((result) => {
-    //       console.log(result.user);
-    //       e.target.reset();
-    //       navigate("/");
-    //     })
-    //     .catch((error) => {
-    //       console.log("ERROR", error.message);
-    //     });
+      //   createUser(email, password)
+      //     .then((result) => {
+      //       console.log(result.user);
+      //       e.target.reset();
+      //       navigate("/");
+      //     })
+      //     .catch((error) => {
+      //       console.log("ERROR", error.message);
+      //     });
     };
 
     return (
@@ -32,7 +44,7 @@ const SignUp = () => {
             <h2 className="text-4xl font-bold my-1">Sign Up</h2>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form onSubmit={handleSignUp} className="card-body">
+            <form onSubmit={handleSubmit} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Full Name</span>
