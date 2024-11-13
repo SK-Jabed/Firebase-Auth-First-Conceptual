@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { authContext } from '../Layout/MainLayout';
 
 
 const Navbar = () => {
+    const { handleLogOut } = useContext(authContext);
+
     const links = (
       <>
         <li>
@@ -76,7 +79,10 @@ const Navbar = () => {
           ) : (
             <Link to={"/login"}>Login</Link>
           )} */}
-          <button className="btn btn-info ml-2 text-base font-bold">
+          <button
+            onClick={handleLogOut}
+            className="btn btn-info ml-2 text-base font-bold"
+          >
             Sign Out
           </button>
         </div>

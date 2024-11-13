@@ -4,7 +4,9 @@ import Navbar from '../Navbar/Navbar';
 import {
   GithubAuthProvider,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
+  signOut,
   TwitterAuthProvider,
 } from "firebase/auth";
 import auth from "../../firebase.config";
@@ -49,16 +51,36 @@ const MainLayout = () => {
         })
     }
 
+    const handleLogOut = () => {
+        signOut(auth)
+        .then(result => {
+            console.log(result);
+        })
+        .catch(error => {
+            console.log("ERROR", error);
+        })
+    }
+
     useEffect(() => {
         console.log("User state:", user);
     }, [user])
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+        return () => {
+           unsubscribe(); 
+        } 
+    }, [])
 
     const authData = {
       handleGoogleLogin,
       handleGithubLogin,
       handleTwitterLogin,
-      user, 
-      setUser
+      user,
+      setUser,
+      handleLogOut,
     };
 
     return (
